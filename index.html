@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nulli 物本集 — 物归本，无繁饰</title>
+<meta name="description" content="Nulli 物本集，独立设计品牌。以自然光影、植物肌理与建筑空间为语言，采集自然，而非印刷自然。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+SC:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EAE5DA;
+  --paper:#F8F6F0;
+  --ink:#77766C;
+  --ink-deep:#5f5e55;
+  --sage:#A5A58C;
+  --hairline:rgba(119,118,108,.28);
+  --serif-cn:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  --serif-en:'Cormorant Garamond','Noto Serif SC',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif-cn);
+  font-weight:300;
+  letter-spacing:.06em;
+  line-height:2;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--sage);color:var(--paper)}
+
+/* ---------- 通用 ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(24px,6vw,96px)}
+.en{font-family:var(--serif-en);letter-spacing:.28em;text-transform:uppercase;font-weight:300}
+.kicker{font-size:11px;letter-spacing:.4em;color:var(--sage);text-transform:uppercase;font-family:var(--serif-en)}
+.hairline{height:1px;background:var(--hairline);border:none}
+
+/* ---------- 导航 ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .5s ease, box-shadow .5s ease;
+}
+header.solid{background:rgba(234,229,218,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{font-size:17px;letter-spacing:.35em;color:var(--ink-deep);font-weight:400}
+.logo em{font-family:var(--serif-en);font-style:normal;letter-spacing:.2em;margin-right:.6em;font-size:18px}
+.nav-links{display:flex;gap:clamp(18px,3vw,44px);font-size:13px}
+.nav-links a{position:relative;padding:4px 0;color:var(--ink);transition:color .4s}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--ink);transition:width .45s ease}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{display:block;width:22px;height:1px;background:var(--ink);margin:6px 0;transition:.4s}
+
+/* ---------- 页面切换 ---------- */
+.page{display:none;min-height:100vh}
+.page.active{display:block;animation:pageIn 1.1s cubic-bezier(.22,.61,.36,1) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:100vh;min-height:560px;overflow:hidden}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{transform:scale(1.06);animation:heroZoom 8s ease-out forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(234,229,218,.18),rgba(234,229,218,.05) 45%,rgba(234,229,218,.32))}
+.hero-text{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#5f5e55;z-index:2;padding:0 24px}
+.hero-text .en{font-size:clamp(11px,1.1vw,14px);opacity:0;animation:rise 1.4s .5s ease both}
+.hero-text h1{font-size:clamp(30px,4.6vw,56px);font-weight:200;letter-spacing:.3em;margin:26px 0 10px;opacity:0;animation:rise 1.4s .8s ease both}
+.hero-text .sub{font-family:var(--serif-en);font-size:clamp(13px,1.4vw,17px);letter-spacing:.34em;opacity:0;animation:rise 1.4s 1.15s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:.92;transform:none}}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.5em;color:#8b8a7d;opacity:0;animation:rise 1.4s 1.6s ease both;text-align:center}
+.scroll-hint::after{content:'';display:block;width:1px;height:44px;background:linear-gradient(var(--ink),transparent);margin:12px auto 0;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* ---------- 章节通用 ---------- */
+section{padding:clamp(80px,11vw,150px) 0}
+.sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:clamp(40px,5vw,72px)}
+.sec-head h2{font-size:clamp(20px,2.2vw,27px);font-weight:300;letter-spacing:.3em;color:var(--ink-deep)}
+.sec-head .en{font-size:11px;color:var(--sage)}
+.paper{background:var(--paper)}
+
+/* 品牌理念 */
+.philo{max-width:720px;margin:0 auto;text-align:center}
+.philo .line{font-size:clamp(20px,2.6vw,30px);font-weight:200;letter-spacing:.24em;color:var(--ink-deep);line-height:1.9}
+.philo p{margin-top:34px;font-size:14.5px;color:#8b8a7d}
+
+/* 产品网格 */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,36px)}
+.card{cursor:pointer;position:relative}
+.card .ph{position:relative;overflow:hidden;aspect-ratio:3/4;background:#dcd6c8}
+.card .ph img{transition:transform 1.4s cubic-bezier(.22,.61,.36,1)}
+.card:hover .ph img{transform:scale(1.05)}
+.card .ph::after{content:'';position:absolute;inset:0;background:rgba(234,229,218,0);transition:background .8s}
+.card:hover .ph::after{background:rgba(234,229,218,.1)}
+.card .no{position:absolute;top:14px;left:16px;font-family:var(--serif-en);font-size:12px;letter-spacing:.2em;color:rgba(95,94,85,.85);z-index:2}
+.card .meta{padding:18px 4px 0}
+.card .meta .n-en{font-family:var(--serif-en);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--sage)}
+.card .meta .n-cn{font-size:15.5px;letter-spacing:.2em;color:var(--ink-deep);margin-top:4px}
+.card .meta .n-desc{font-size:12.5px;color:#9b9a8c;margin-top:6px;line-height:1.8}
+
+/* 空间预告 */
+.space-teaser{position:relative;overflow:hidden}
+.space-teaser .ph{height:clamp(320px,52vw,560px);overflow:hidden}
+.space-teaser img{transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
+.space-teaser:hover img{transform:scale(1.04)}
+.space-teaser .cap{position:absolute;right:clamp(20px,5vw,72px);bottom:clamp(20px,4vw,56px);background:rgba(248,246,240,.9);padding:22px 30px;max-width:340px;backdrop-filter:blur(4px)}
+.space-teaser .cap h3{font-size:16px;font-weight:300;letter-spacing:.26em;color:var(--ink-deep);margin-bottom:8px}
+.space-teaser .cap p{font-size:12.5px;color:#9b9a8c;line-height:1.9}
+
+/* 链接按钮 */
+.link-more{display:inline-block;margin-top:40px;font-size:12px;letter-spacing:.4em;color:var(--ink-deep);border-bottom:1px solid var(--ink);padding-bottom:6px;transition:color .4s,letter-spacing .4s}
+.link-more:hover{color:var(--sage);letter-spacing:.5em}
+
+/* ---------- 关于 ---------- */
+.page-hero{height:52vh;min-height:380px;position:relative;overflow:hidden;margin-top:76px}
+.page-hero img{transform:scale(1.05)}
+.page-hero::after{content:'';position:absolute;inset:0;background:rgba(234,229,218,.22)}
+.page-hero .t{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:2}
+.page-hero .t h1{font-size:clamp(24px,3.2vw,38px);font-weight:200;letter-spacing:.34em;color:#57564e;animation:rise 1.4s .3s ease both}
+.page-hero .t .en{font-size:12px;color:#77766c;margin-top:14px;animation:rise 1.4s .6s ease both}
+.story{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:center}
+.story .ph{aspect-ratio:4/5;overflow:hidden}
+.story h3{font-size:clamp(18px,2vw,23px);font-weight:300;letter-spacing:.26em;color:var(--ink-deep);margin-bottom:26px}
+.story p{font-size:14px;color:#8b8a7d;margin-bottom:18px}
+.rev{opacity:0;transform:translateY(34px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.rev.in{opacity:1;transform:none}
+.principles{counter-reset:p}
+.principle{display:grid;grid-template-columns:80px 1fr 1.4fr;gap:clamp(16px,4vw,60px);padding:clamp(30px,4vw,52px) 0;border-top:1px solid var(--hairline);align-items:baseline}
+.principle:last-child{border-bottom:1px solid var(--hairline)}
+.principle .num{font-family:var(--serif-en);font-size:30px;color:var(--sage);font-weight:300}
+.principle h4{font-size:16px;font-weight:300;letter-spacing:.24em;color:var(--ink-deep)}
+.principle p{font-size:13.5px;color:#8b8a7d}
+.quote{max-width:760px;margin:0 auto;text-align:center}
+.quote .mark{font-family:var(--serif-en);font-size:60px;color:var(--sage);line-height:1}
+.quote p{font-size:clamp(17px,2vw,22px);font-weight:200;letter-spacing:.2em;color:var(--ink-deep);line-height:2.1;margin-top:10px}
+.quote .by{margin-top:26px;font-size:11px;letter-spacing:.4em;color:var(--sage)}
+
+/* ---------- 系列 ---------- */
+.collection-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.4vw,52px)}
+.collection-grid .card .ph{aspect-ratio:16/11}
+.collection-intro{max-width:640px;margin-bottom:clamp(40px,5vw,72px)}
+.collection-intro p{font-size:14px;color:#8b8a7d}
+
+/* ---------- 产品详情 ---------- */
+.pd{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,6vw,96px);align-items:start}
+.pd .ph{aspect-ratio:3/4;overflow:hidden;position:sticky;top:110px}
+.pd-info{padding-top:20px}
+.pd-info .no{font-family:var(--serif-en);font-size:12px;letter-spacing:.3em;color:var(--sage)}
+.pd-info h1{font-size:clamp(24px,3vw,34px);font-weight:200;letter-spacing:.3em;color:var(--ink-deep);margin:16px 0 6px}
+.pd-info .en-name{font-family:var(--serif-en);font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:#9b9a8c}
+.pd-info .lead{margin:34px 0;font-size:14px;color:#8b8a7d}
+.spec{border-top:1px solid var(--hairline)}
+.spec-row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--hairline)}
+.spec-row .k{font-size:12px;letter-spacing:.3em;color:var(--sage)}
+.spec-row .v{font-size:13.5px;color:#8b8a7d;line-height:2}
+.pd-actions{margin-top:44px;display:flex;gap:18px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 44px;font-size:12.5px;letter-spacing:.34em;border:1px solid var(--ink);color:var(--ink-deep);background:transparent;cursor:pointer;font-family:var(--serif-cn);transition:.45s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.ghost{border-color:var(--hairline);color:var(--ink)}
+.btn.ghost:hover{background:var(--sage);border-color:var(--sage);color:var(--paper)}
+.pd-nav{display:flex;justify-content:space-between;margin-top:90px;padding-top:30px;border-top:1px solid var(--hairline);font-size:12px;letter-spacing:.3em}
+.pd-nav a{color:var(--ink);transition:color .4s}
+.pd-nav a:hover{color:var(--sage)}
+
+/* ---------- 空间 ---------- */
+.space-block{margin-bottom:clamp(60px,8vw,110px)}
+.space-block .ph{height:clamp(340px,58vw,620px);overflow:hidden}
+.space-block .cap{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(16px,4vw,60px);padding:26px 4px 0;align-items:baseline}
+.space-block .cap h3{font-size:16px;font-weight:300;letter-spacing:.26em;color:var(--ink-deep)}
+.space-block .cap .en{font-size:11px;color:var(--sage);margin-top:6px}
+.space-block .cap p{font-size:13.5px;color:#8b8a7d}
+
+/* ---------- 联系 ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,7vw,110px)}
+.contact-item{padding:26px 0;border-bottom:1px solid var(--hairline)}
+.contact-item .k{font-size:11px;letter-spacing:.36em;color:var(--sage);text-transform:uppercase;font-family:var(--serif-en)}
+.contact-item .v{font-size:15px;color:var(--ink-deep);margin-top:10px;letter-spacing:.12em}
+.socials{display:flex;gap:26px;margin-top:34px;font-size:12.5px;letter-spacing:.24em}
+.socials a{color:var(--ink);border-bottom:1px solid transparent;transition:.4s}
+.socials a:hover{color:var(--sage);border-color:var(--sage)}
+form .field{margin-bottom:30px}
+form label{display:block;font-size:11px;letter-spacing:.36em;color:var(--sage);margin-bottom:12px}
+form input,form textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--hairline);
+  padding:10px 2px;font-family:var(--serif-cn);font-size:14px;color:var(--ink-deep);
+  letter-spacing:.1em;outline:none;transition:border-color .4s;resize:none;
+}
+form input:focus,form textarea:focus{border-color:var(--sage)}
+.toast{position:fixed;bottom:40px;left:50%;transform:translate(-50%,20px);background:var(--ink-deep);color:var(--paper);padding:14px 36px;font-size:13px;letter-spacing:.24em;opacity:0;pointer-events:none;transition:.6s;z-index:200}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- 页脚 ---------- */
+footer{background:var(--paper);border-top:1px solid var(--hairline);padding:clamp(50px,7vw,90px) 0 40px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(24px,5vw,80px)}
+.foot .slogan{font-size:14px;letter-spacing:.24em;color:var(--ink-deep);margin-top:18px}
+.foot .en-slogan{font-family:var(--serif-en);font-size:11px;letter-spacing:.3em;color:var(--sage);margin-top:8px;text-transform:uppercase}
+.foot h5{font-size:11px;letter-spacing:.36em;color:var(--sage);margin-bottom:18px;font-weight:400}
+.foot ul{list-style:none}
+.foot ul li{margin-bottom:10px}
+.foot ul a,.foot ul span{font-size:13px;color:#8b8a7d;transition:color .4s}
+.foot ul a:hover{color:var(--ink-deep)}
+.foot-base{display:flex;justify-content:space-between;margin-top:clamp(40px,5vw,70px);padding-top:24px;border-top:1px solid var(--hairline);font-size:11px;letter-spacing:.2em;color:#a3a294}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:960px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .story,.pd,.contact-grid{grid-template-columns:1fr}
+  .pd .ph{position:static;aspect-ratio:4/5}
+  .principle{grid-template-columns:52px 1fr}
+  .principle p{grid-column:2}
+  .foot{grid-template-columns:1fr 1fr}
+  .collection-grid{grid-template-columns:1fr}
+  .space-block .cap{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .nav-links{
+    position:fixed;inset:76px 0 auto 0;background:rgba(234,229,218,.97);backdrop-filter:blur(12px);
+    flex-direction:column;gap:0;padding:10px 0 24px;border-bottom:1px solid var(--hairline);
+    transform:translateY(-8px);opacity:0;pointer-events:none;transition:.45s;
+  }
+  .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+  .nav-links a{padding:14px clamp(24px,6vw,96px);font-size:14px}
+  .nav-links a::after{display:none}
+  .burger{display:block}
+  .grid{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .foot-base{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="#/" class="logo"><em>Nulli</em>物本集</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#/" data-page="home">首页</a>
+      <a href="#/about" data-page="about">品牌故事</a>
+      <a href="#/collection" data-page="collection">产品系列</a>
+      <a href="#/space" data-page="space">品牌空间</a>
+      <a href="#/contact" data-page="contact">联系我们</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ============ 首页 ============ -->
+  <section class="page" id="page-home">
+    <div class="hero">
+      <div class="bg"><img src="images/hero.jpg" alt="清晨的自然光影"></div>
+      <div class="hero-text">
+        <div class="en">Capture Nature, Not Print It.</div>
+        <h1>物归本，无繁饰</h1>
+        <div class="sub">NULLI — 物 本 集</div>
+      </div>
+      <div class="scroll-hint">向下探索</div>
+    </div>
+
+    <section class="paper">
+      <div class="wrap philo rev">
+        <div class="kicker">Philosophy · 理念</div>
+        <div class="line" style="margin-top:30px">我们采集自然的光影与肌理，<br>而不试图印刷它。</div>
+        <p>Nulli 物本集是一个独立设计品牌。我们相信物件有自己的本来面目——一株草木的干枯弧线、一块岩石的粗粝毛孔、一段午后斜阳的缓慢移动。设计在这里做的，只是把这些已经存在的东西，安静地收拢进日常物件之中。</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head rev"><h2>精选产品</h2><span class="en">Selected Works</span></div>
+        <div class="grid rev" id="homeProducts"></div>
+        <div class="rev"><a href="#/collection" class="link-more">查看全部系列</a></div>
+      </div>
+    </section>
+
+    <section class="paper">
+      <div class="wrap">
+        <div class="sec-head rev"><h2>品牌空间</h2><span class="en">The Space</span></div>
+        <div class="space-teaser rev">
+          <div class="ph"><img src="images/space-interior.jpg" alt="品牌空间室内"></div>
+          <div class="cap">
+            <h3>光的空间</h3>
+            <p>磨砂玻璃立面印满植物的光影，数十把伞安静地悬浮在穹顶之下。产品不陈列在货架上，而是被安置在光会经过的地方。</p>
+          </div>
+        </div>
+        <div class="rev"><a href="#/space" class="link-more">走进空间</a></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 品牌故事 ============ -->
+  <section class="page" id="page-about">
+    <div class="page-hero">
+      <img src="images/about-botanical.jpg" alt="植物光影">
+      <div class="t"><h1>品牌故事</h1><div class="en">About Nulli</div></div>
+    </div>
+
+    <section>
+      <div class="wrap story">
+        <div class="ph rev"><img src="images/about-craft.jpg" alt="手工工艺"></div>
+        <div class="rev">
+          <div class="kicker">Origin · 起源</div>
+          <h3 style="margin-top:20px">从一间有光的工作室开始</h3>
+          <p>Nulli 物本集诞生于一间朝北的旧工作室。创办人说，最初的灵感并非来自某个产品，而是来自某个下午——阳光穿过窗边的干枯尤加利，在灰泥墙上投下缓慢移动的影子。那一刻突然明白：自然本身就是最好的设计师，我们只需要学会不破坏它。</p>
+          <p>"Nulli" 源自拉丁语中"无"的词根，"物本集"则意为"以物为本的集合"。名字合在一起是一种提醒：去除繁饰之后，物件才回到它的本来面目。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper">
+      <div class="wrap">
+        <div class="sec-head rev"><h2>设计哲学</h2><span class="en">Design Philosophy</span></div>
+        <div class="principles">
+          <div class="principle rev">
+            <div class="num">01</div>
+            <h4>采集，而非印刷</h4>
+            <p>我们观察自然中的光影、肌理与形态，将它们转译为产品的形态语言，而不是把自然图案简单印刷在表面。一片叶子的价值在于它落下的方式，而非它的照片。</p>
+          </div>
+          <div class="principle rev">
+            <div class="num">02</div>
+            <h4>材料自己会说话</h4>
+            <p>初榨橄榄油的青涩、桑皮纸的透光、亚麻的褶皱、竹的韧性——材料的选择先于造型。我们尽量少做，让材料保留它们原本的表情。</p>
+          </div>
+          <div class="principle rev">
+            <div class="num">03</div>
+            <h4>光是最好的装饰</h4>
+            <p>产品被设计为与一天中不同时刻的光相处：清晨的冷光、午后的暖光、灯下的暗部。一件 Nulli 的物件，应该在一天中呈现出不同的样子。</p>
+          </div>
+          <div class="principle rev">
+            <div class="num">04</div>
+            <h4>慢，是一种工艺</h4>
+            <p>冷制皂需要阴置六周，灯具的纸罩需要手工裱糊三层。我们接受慢，因为自然从来不赶时间。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap quote rev">
+        <div class="mark">"</div>
+        <p>自然从不复制品 物件也不必伪装成自然<br>我们只是把它们放在一起，然后退后一步。</p>
+        <div class="by">NULLI 物本集 · 创办人手记</div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 产品系列 ============ -->
+  <section class="page" id="page-collection">
+    <div class="page-hero">
+      <img src="images/hero.jpg" alt="产品系列">
+      <div class="t"><h1>产品系列</h1><div class="en">Collection</div></div>
+    </div>
+    <section>
+      <div class="wrap">
+        <div class="collection-intro rev">
+          <div class="kicker">Collection · 系列</div>
+          <p style="margin-top:20px">四个系列，来自同一种观察方式：一片叶子被封存进透明的皂里，岩层深处的矿物归还给皮肤，雨停后的空气成为香，一棵树的叶影撑在头顶成为伞。每一件都以编号命名，如同标本，如同日记。</p>
+        </div>
+        <div class="collection-grid rev" id="collectionGrid"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 产品详情 ============ -->
+  <section class="page" id="page-product">
+    <div style="height:76px"></div>
+    <section style="padding-top:clamp(40px,6vw,80px)">
+      <div class="wrap" id="productDetail"></div>
+      <div class="wrap">
+        <div class="pd-nav">
+          <a href="#/collection">← 返回系列</a>
+          <a id="pdNext" href="#">下一个产品 →</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 品牌空间 ============ -->
+  <section class="page" id="page-space">
+    <div class="page-hero">
+      <img src="images/space-facade.jpg" alt="品牌空间">
+      <div class="t"><h1>品牌空间</h1><div class="en">The Space</div></div>
+    </div>
+    <section>
+      <div class="wrap">
+        <div class="collection-intro rev">
+          <div class="kicker">Space · 空间</div>
+          <p style="margin-top:20px">Nulli 的空间不是商店，而是一个让光参与陈列的容器。磨砂玻璃立面把树影留在墙上，穹顶天窗把日光引入室内，数十把印着叶影的伞悬浮在半空——像一场停在半空的雨。产品不追逐视线，它们只是在光经过的地方，等你自己走过去。</p>
+        </div>
+
+        <div class="space-block rev">
+          <div class="ph"><img src="images/space-facade.jpg" alt="店面外观"></div>
+          <div class="cap">
+            <div>
+              <h3>檐 · 外观</h3>
+              <div class="en">Facade</div>
+            </div>
+            <p>临街立面由磨砂玻璃与石柱构成，玻璃上印着植物枝叶的光影。没有灯箱，也没有橱窗贴纸——树影穿过玻璃落进室内，立面本身每天都不一样。</p>
+          </div>
+        </div>
+
+        <div class="space-block rev">
+          <div class="ph"><img src="images/space-facade-2.jpg" alt="弧形立面"></div>
+          <div class="cap">
+            <div>
+              <h3>曲 · 立面</h3>
+              <div class="en">Curved Facade</div>
+            </div>
+            <p>转角处，立面缓缓弯成一道弧线。雨后的地面映出店内的暖光，悬浮的伞装置透过玻璃隐约可见，像雾里的一场雨。</p>
+          </div>
+        </div>
+
+        <div class="space-block rev">
+          <div class="ph"><img src="images/space-interior.jpg" alt="室内空间"></div>
+          <div class="cap">
+            <div>
+              <h3>光 · 室内</h3>
+              <div class="en">Interior</div>
+            </div>
+            <p>穹顶天窗把日光引入深处，圆形石质展台上陈列着当季的器物。下午四点之后，植物的影子会在地面上缓慢移动，整个空间慢慢染上一层暖色。</p>
+          </div>
+        </div>
+
+        <div class="space-block rev">
+          <div class="ph"><img src="images/space-umbrella.jpg" alt="悬浮伞装置"></div>
+          <div class="cap">
+            <div>
+              <h3>悬 · 装置</h3>
+              <div class="en">Installation</div>
+            </div>
+            <p>数十把印着叶影的伞悬浮在空中，伞面收集着从天窗落下的光。它们既是装置，也是檐下空间的灵感原点——雨落在 Nulli，从不慌张。</p>
+          </div>
+        </div>
+
+        <div class="space-block rev">
+          <div class="ph"><img src="images/space-installation.jpg" alt="伞装置细节"></div>
+          <div class="cap">
+            <div>
+              <h3>影 · 细节</h3>
+              <div class="en">Light &amp; Shadow</div>
+            </div>
+            <p>走近看，伞面上的叶影与真实的绿植互为镜像。空间里的装饰，一半来自植物，一半来自时间。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 联系我们 ============ -->
+  <section class="page" id="page-contact">
+    <div style="height:76px"></div>
+    <section style="padding-top:clamp(40px,6vw,80px)">
+      <div class="wrap">
+        <div class="sec-head rev"><h2>联系我们</h2><span class="en">Contact</span></div>
+        <div class="contact-grid">
+          <div class="rev">
+            <div class="contact-item">
+              <div class="k">Brand · 品牌</div>
+              <div class="v">Nulli 物本集 · 独立设计品牌</div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Email · 邮箱</div>
+              <div class="v">hello@nulli-studio.com</div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Phone · 电话</div>
+              <div class="v">+86 000 0000 0000（周一至周五 10:00 – 18:00）</div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Studio · 空间地址</div>
+              <div class="v">某市某区安静的街 1 号 · 檐下<br>欢迎预约到访，看一场下午的光</div>
+            </div>
+            <div class="socials">
+              <a href="#" onclick="return false">微信</a>
+              <a href="#" onclick="return false">小红书</a>
+              <a href="#" onclick="return false">Instagram</a>
+              <a href="#" onclick="return false">Behance</a>
+            </div>
+          </div>
+          <div class="rev">
+            <div class="kicker" style="margin-bottom:34px">Write to us · 留言</div>
+            <form id="contactForm">
+              <div class="field">
+                <label>称呼 / NAME</label>
+                <input type="text" name="name" required autocomplete="off">
+              </div>
+              <div class="field">
+                <label>邮箱 / EMAIL</label>
+                <input type="email" name="email" required autocomplete="off">
+              </div>
+              <div class="field">
+                <label>想说的话 / MESSAGE</label>
+                <textarea name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn">寄 出</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#/" class="logo"><em>Nulli</em>物本集</a>
+        <div class="slogan">物归本，无繁饰。</div>
+        <div class="en-slogan">Capture Nature, Not Print It.</div>
+      </div>
+      <div>
+        <h5>导航</h5>
+        <ul>
+          <li><a href="#/">首页</a></li>
+          <li><a href="#/about">品牌故事</a></li>
+          <li><a href="#/collection">产品系列</a></li>
+          <li><a href="#/space">品牌空间</a></li>
+          <li><a href="#/contact">联系我们</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系</h5>
+        <ul>
+          <li><span>hello@nulli-studio.com</span></li>
+          <li><span>某市某区安静的街 1 号 · 檐下</span></li>
+          <li><span>微信 / 小红书 / Instagram</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 NULLI 物本集 · All Rights Reserved</span>
+      <span>Designed with nature, in daylight</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已收到，我们会尽快回信</div>
+
+<script>
+/* ================= 产品数据 ================= */
+const PRODUCTS = [
+  {
+    id:'soap', no:'No.01',
+    cn:'草木 · 水晶皂', en:'Botanical Soap Cube',
+    desc:'真实叶片封存的透明皂',
+    img:'images/product-soap.jpg',
+    lead:'把一片正在生长的叶子，封存进一块透明的皂里。尤加利、蕨类与三叶草被完整地保存在澄澈的皂体之中，阳光下投出叶形的透光影子——皂体本身，就是一只小小的光的容器。',
+    specs:{
+      '材质':'天然植物油皂基、真实压制叶片（尤加利 / 蕨类 / 三叶草）',
+      '工艺':'低温手工浇筑 · 叶片逐层封存 · 缓慢澄澈',
+      '光影':'阳光穿过皂体，叶片的影子被投在桌面与掌心，随角度缓慢移动',
+      '规格':'约 60g/块 · 叶形随机 · 每一块都封存着不同的植物'
+    }
+  },
+  {
+    id:'care', no:'No.02',
+    cn:'矿物 · 洗护', en:'Mineral Care',
+    desc:'护手霜与洗手液',
+    img:'images/product-care.jpg',
+    lead:'来自岩层深处的矿物能量，经过时间的沉积，温和地归还给皮肤。天然矿物微粒轻柔地抚平日常的粗糙，白花与青叶的气息，像洗完手之后留在掌心的那阵风。',
+    specs:{
+      '系列':'护手霜 HAND CREAM · 洗手液 HAND WASH',
+      '材质':'天然矿物微粒 · 植物基配方 · 可持续生活',
+      '质地':'磨砂颗粒温和焕新，洗净之余恢复肌肤的平衡',
+      '气息':'白花与青叶，干净、微凉、几乎透明'
+    }
+  },
+  {
+    id:'perfume', no:'No.03',
+    cn:'雨后 · 香水', en:'After Rain',
+    desc:'苔藓与湿土调淡香水',
+    img:'images/product-perfume.jpg',
+    lead:'一场雨停后十分钟里的空气：苔藓、无花果叶、被淋湿的泥土和一点远处的木。它不甜，也不冷，只是安静。',
+    specs:{
+      '香调':'前调 · 无花果叶与雨水气息 / 中调 · 苔藓与鸢尾根 / 尾调 · 湿土、雪松与微量的烟',
+      '材质':'天然植物精油与手工酊剂调配 · 磨砂玻璃瓶 · 石质瓶盖',
+      '工艺':'小批量手工调配 · 每批不超过一百瓶 · 静置熟成四周',
+      '规格':'50ml · 淡香水 Eau de Toilette'
+    }
+  },
+  {
+    id:'umbrella', no:'No.04',
+    cn:'叶影 · 伞', en:'Leaf Shadow Umbrella',
+    desc:'印着叶影的透明长柄伞',
+    img:'images/product-umbrella.jpg',
+    lead:'透明的伞面上印着一整棵树的叶影。撑开它，就像把一片树冠举过头顶——晴天是影子，雨天是屋檐。雨落在伞面上，光落在雨上。',
+    specs:{
+      '材质':'透明伞面 · 植物叶影印刷 · 原木弯钩手柄',
+      '工艺':'叶影取自真实树冠的俯瞰影像，热压成型于透明伞面',
+      '气质':'不追求零透水也不追求抗风极限，它属于温和的雨与散步的人',
+      '规格':'伞长约 80cm · 展开直径约 98cm · 重量约 420g'
+    }
+  }
+];
+
+/* ================= 渲染产品卡片 ================= */
+function cardHTML(p){
+  return `<a class="card" href="#/product/${p.id}">
+    <div class="ph"><span class="no">${p.no}</span><img src="${p.img}" alt="${p.cn}" loading="lazy"></div>
+    <div class="meta">
+      <div class="n-en">${p.en}</div>
+      <div class="n-cn">${p.cn}</div>
+      <div class="n-desc">${p.desc}</div>
+    </div>
+  </a>`;
+}
+document.getElementById('homeProducts').innerHTML = PRODUCTS.map(cardHTML).join('');
+document.getElementById('collectionGrid').innerHTML = PRODUCTS.map(cardHTML).join('');
+
+/* ================= 产品详情 ================= */
+function renderProduct(id){
+  const i = PRODUCTS.findIndex(p=>p.id===id);
+  const p = PRODUCTS[i];
+  if(!p){ location.hash = '#/collection'; return; }
+  const next = PRODUCTS[(i+1)%PRODUCTS.length];
+  document.getElementById('productDetail').innerHTML = `
+    <div class="pd">
+      <div class="ph rev in"><img src="${p.img}" alt="${p.cn}"></div>
+      <div class="pd-info rev in">
+        <div class="no">${p.no} · Collection</div>
+        <h1>${p.cn}</h1>
+        <div class="en-name">${p.en}</div>
+        <p class="lead">${p.lead}</p>
+        <div class="spec">
+          ${Object.entries(p.specs).map(([k,v])=>`<div class="spec-row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}
+        </div>
+        <div class="pd-actions">
+          <a href="#/contact" class="btn">预约选购</a>
+          <a href="#/space" class="btn ghost">到店看看</a>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('pdNext').href = '#/product/' + next.id;
+}
+
+/* ================= 路由 ================= */
+const PAGES = ['home','about','collection','product','space','contact'];
+function route(){
+  const hash = location.hash.replace(/^#\/?/,'') || 'home';
+  const [name, param] = hash.split('/');
+  const page = PAGES.includes(name) ? name : 'home';
+  PAGES.forEach(pn=>{
+    document.getElementById('page-'+pn).classList.toggle('active', pn===page);
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active', a.dataset.page===page);
+  });
+  if(page==='product') renderProduct(param || PRODUCTS[0].id);
+  window.scrollTo({top:0,behavior:'instant' in window ? 'instant' : 'auto'});
+  bindReveal();
+  closeMenu();
+  initHeader();
+}
+window.addEventListener('hashchange', route);
+
+/* ================= 滚动显现 ================= */
+let io;
+function bindReveal(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.page.active .rev:not(.in)').forEach(el=>io.observe(el));
+}
+
+/* ================= 导航状态 ================= */
+const header = document.getElementById('header');
+function initHeader(){
+  header.classList.toggle('solid', window.scrollY > 40 || !document.getElementById('page-home').classList.contains('active'));
+}
+window.addEventListener('scroll', initHeader, {passive:true});
+
+/* 移动端菜单 */
+const navLinks = document.getElementById('navLinks');
+function closeMenu(){ navLinks.classList.remove('open'); }
+document.getElementById('burger').addEventListener('click', ()=>navLinks.classList.toggle('open'));
+
+/* ================= 表单 ================= */
+document.getElementById('contactForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  e.target.reset();
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2600);
+});
+
+/* 启动 */
+route();
+</script>
+</body>
+</html>
